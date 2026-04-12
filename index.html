@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary meta -->
     <meta name="description" content="P Sai Ramcharan Reddy — AI/ML Engineer and builder based at IIT Gandhinagar. Building production-grade AI systems and software.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="P Sai Ramcharan Reddy — AI Engineer">
+    <meta property="og:description" content="Building production-grade AI systems at IIT Gandhinagar. Full-stack by approach, ML-first by design.">
+    <meta property="og:url" content="https://randomartist22.github.io/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="P Sai Ramcharan Reddy — AI Engineer">
+    <meta name="twitter:description" content="Building production-grade AI systems at IIT Gandhinagar. Four production tools shipped in year one.">
+
     <title>Sai Ramcharan — AI Engineer</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,19 +30,17 @@
     <style>
         /* ---- Page-specific: index.html ---- */
 
-        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             padding-bottom: 12vh;
-            padding-top: 70px; /* nav height */
+            padding-top: 70px;
             position: relative;
             overflow: hidden;
         }
 
-        /* Canvas sits behind everything */
         #hero-canvas {
             position: absolute;
             inset: 0;
@@ -70,6 +83,11 @@
             letter-spacing: -0.03em;
             color: var(--ink);
             margin-bottom: 4rem;
+        }
+
+        /* Each name line is its own reveal unit */
+        .name-line {
+            display: block;
         }
 
         .hero-name em {
@@ -208,7 +226,6 @@
             gap: 1rem;
         }
 
-        /* Two-column list of work items */
         .work-list {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -219,11 +236,24 @@
             display: block;
             padding: 2.5rem 0;
             border-top: 1px solid var(--bg-3);
-            transition: background 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .work-list-item:hover {
-            background: transparent;
+        /* Accent sweep line on hover */
+        .work-list-item::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent);
+            transition: width 0.45s var(--ease);
+        }
+
+        .work-list-item:hover::before {
+            width: 100%;
         }
 
         .wli-top {
@@ -262,11 +292,12 @@
             font-weight: 400;
             color: var(--ink);
             margin-bottom: 0.6rem;
-            transition: color 0.3s;
+            transition: color 0.3s, padding-left 0.4s var(--ease);
         }
 
         .work-list-item:hover .wli-title {
             color: var(--accent);
+            padding-left: 0.3rem;
         }
 
         .wli-desc {
@@ -275,15 +306,8 @@
             line-height: 1.65;
         }
 
-        /* Odd items get right padding for spacing in the grid */
         .work-list-item:nth-child(odd) {
             padding-right: 4rem;
-        }
-
-        /* ---- Misc: divider ---- */
-        .hr-thin {
-            border: none;
-            border-top: 1px solid var(--bg-3);
         }
 
         /* Responsive */
@@ -313,7 +337,7 @@
         sai-ramcharan
     </a>
     <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="index.html">Home</a></li>
         <li><a href="works.html">Works</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li>
@@ -322,27 +346,42 @@
             </a>
         </li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </button>
 </nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="works.html">Works</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a class="nav-disabled">Blog <span class="nav-soon">soon</span></a></li>
+    </ul>
+</div>
 
 <!-- ======== Hero ======== -->
 <section class="hero">
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
 
     <div class="container hero-content">
-        <!-- Scroll hint -->
         <div class="hero-scroll-hint" aria-hidden="true">scroll</div>
 
         <div class="hero-eyebrow sr">
             AI / ML Engineer
         </div>
 
-        <h1 class="hero-name sr sr-d1">
-            P Sai<br>
-            Ramcharan<br>
-            <em>Reddy.</em>
+        <!-- Each line is its own reveal, staggered -->
+        <h1 class="hero-name">
+            <span class="name-line sr sr-d1">P Sai</span>
+            <span class="name-line sr sr-d2">Ramcharan</span>
+            <span class="name-line sr sr-d3"><em>Reddy.</em></span>
         </h1>
 
-        <div class="hero-foot sr sr-d2">
+        <div class="hero-foot sr sr-d4">
             <p class="hero-tagline">
                 Building production-grade AI systems at IIT Gandhinagar.
                 Full-stack by approach, ML-first by design.
@@ -403,7 +442,6 @@
         </div>
 
         <div class="work-list">
-
             <a href="works.html#reels" class="work-list-item sr">
                 <div class="wli-top">
                     <span class="wli-num">01</span>
@@ -455,7 +493,6 @@
                 <div class="wli-title">markd2pdf</div>
                 <p class="wli-desc">CLI tool converting Markdown to print-ready PDFs. Typed Python, custom themes, syntax highlighting, and batch processing.</p>
             </a>
-
         </div>
     </div>
 </section>
@@ -475,117 +512,97 @@
 <script>
     // ---- Scroll reveal ----
     const srEls = document.querySelectorAll('.sr');
-    const srObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('in');
-                srObserver.unobserve(entry.target);
-            }
-        });
+    const srObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); srObs.unobserve(e.target); } });
     }, { threshold: 0.12 });
-
-    srEls.forEach(el => srObserver.observe(el));
-
-    // Trigger immediately-visible elements
+    srEls.forEach(el => srObs.observe(el));
     window.addEventListener('load', () => {
-        srEls.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight * 0.9) {
-                el.classList.add('in');
-            }
-        });
+        srEls.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight * 0.92) el.classList.add('in'); });
     });
 
-    // ---- Hero canvas: sparse floating ink-dot field ----
+    // ---- Mobile hamburger ----
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('is-open', isOpen);
+        hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    document.addEventListener('click', e => {
+        if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+            mobileMenu.classList.remove('open');
+            hamburger.classList.remove('is-open');
+            hamburger.setAttribute('aria-expanded', false);
+        }
+    });
+
+    // ---- Page transitions ----
+    document.querySelectorAll('a[href]').forEach(a => {
+        const href = a.getAttribute('href');
+        if (href && !href.startsWith('http') && !href.startsWith('mailto') && !href.startsWith('#')) {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const dest = a.href;
+                document.body.classList.add('page-exit');
+                setTimeout(() => { window.location.href = dest; }, 290);
+            });
+        }
+    });
+
+    // ---- Active nav ----
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
+        const lhref = link.getAttribute('href');
+        if (lhref && (lhref === currentPage || (currentPage === '' && lhref === 'index.html'))) {
+            link.classList.add('active');
+        }
+    });
+
+    // ---- Hero canvas ----
     const canvas = document.getElementById('hero-canvas');
     const ctx = canvas.getContext('2d');
-
-    // Accent color components for drawing
-    const DOT_COLOR = '76, 127, 166';
-    const LINE_COLOR = '76, 127, 166';
-
+    const DOT = '76, 127, 166';
     let W, H, points, raf;
 
     function resize() {
-        W = canvas.clientWidth;
-        H = canvas.clientHeight;
-        canvas.width  = W * devicePixelRatio;
-        canvas.height = H * devicePixelRatio;
+        W = canvas.clientWidth; H = canvas.clientHeight;
+        canvas.width = W * devicePixelRatio; canvas.height = H * devicePixelRatio;
         ctx.scale(devicePixelRatio, devicePixelRatio);
-        buildPoints();
-    }
-
-    function buildPoints() {
-        // Density scales with viewport — stays sparse
         const count = Math.max(20, Math.floor(W * H / 22000));
         points = Array.from({ length: count }, () => ({
-            x:  Math.random() * W,
-            y:  Math.random() * H,
-            vx: (Math.random() - 0.5) * 0.22,
-            vy: (Math.random() - 0.5) * 0.22,
-            r:  Math.random() * 1.4 + 0.8,
+            x: Math.random() * W, y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.22, vy: (Math.random() - 0.5) * 0.22,
+            r: Math.random() * 1.4 + 0.8,
         }));
     }
 
     function draw() {
         ctx.clearRect(0, 0, W, H);
-        const LINK_DIST = W * 0.14; // connection threshold
-
+        const LINK = W * 0.14;
         for (let i = 0; i < points.length; i++) {
             const p = points[i];
-            p.x += p.vx;
-            p.y += p.vy;
-
-            // Gentle bounce
+            p.x += p.vx; p.y += p.vy;
             if (p.x < 0 || p.x > W) { p.vx *= -1; p.x = Math.max(0, Math.min(W, p.x)); }
             if (p.y < 0 || p.y > H) { p.vy *= -1; p.y = Math.max(0, Math.min(H, p.y)); }
-
-            // Draw thin connection lines
             for (let j = i + 1; j < points.length; j++) {
                 const q = points[j];
                 const dx = p.x - q.x, dy = p.y - q.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < LINK_DIST) {
-                    const alpha = (1 - dist / LINK_DIST) * 0.18;
-                    ctx.beginPath();
-                    ctx.moveTo(p.x, p.y);
-                    ctx.lineTo(q.x, q.y);
-                    ctx.strokeStyle = `rgba(${LINE_COLOR}, ${alpha})`;
-                    ctx.lineWidth = 0.6;
-                    ctx.stroke();
+                if (dist < LINK) {
+                    ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
+                    ctx.strokeStyle = `rgba(${DOT}, ${(1 - dist / LINK) * 0.18})`; ctx.lineWidth = 0.6; ctx.stroke();
                 }
             }
         }
-
-        // Draw dots on top
         for (const p of points) {
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${DOT_COLOR}, 0.45)`;
-            ctx.fill();
+            ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${DOT}, 0.45)`; ctx.fill();
         }
-
         raf = requestAnimationFrame(draw);
     }
 
-    window.addEventListener('resize', () => {
-        cancelAnimationFrame(raf);
-        resize();
-        raf = requestAnimationFrame(draw);
-    });
-
-    resize();
-    draw();
-
-    // ---- Nav active state ----
-    const navLinks = document.querySelectorAll('.nav-links a:not(.nav-disabled)');
-    navLinks.forEach(link => {
-        if (link.href === window.location.href) {
-            link.classList.add('active');
-        } else {
-            link.classList.remove('active');
-        }
-    });
+    window.addEventListener('resize', () => { cancelAnimationFrame(raf); resize(); raf = requestAnimationFrame(draw); });
+    resize(); draw();
 </script>
 </body>
 </html>

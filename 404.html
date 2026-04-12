@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Sai Ramcharan</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .not-found {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 6vw;
+        }
+
+        .nf-num {
+            font-family: var(--serif);
+            font-size: clamp(8rem, 20vw, 16rem);
+            font-weight: 300;
+            line-height: 1;
+            color: var(--bg-3);
+            letter-spacing: -0.04em;
+            margin-bottom: 0;
+            user-select: none;
+        }
+
+        .nf-title {
+            font-family: var(--serif);
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 400;
+            color: var(--ink);
+            margin-bottom: 1.2rem;
+        }
+
+        .nf-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .nf-sub {
+            font-size: 1rem;
+            color: var(--ink-light);
+            margin-bottom: 3rem;
+        }
+
+        .nf-link {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+            transition: gap 0.3s var(--ease), border-color 0.3s;
+        }
+
+        .nf-link:hover {
+            gap: 1rem;
+            border-color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <nav class="site-nav">
+        <a href="/index.html" class="nav-logo">
+            <div class="nav-dot"></div>
+            sai-ramcharan
+        </a>
+        <ul class="nav-links">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/works.html">Works</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/works.html">Works</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <main class="not-found">
+        <div class="nf-num">404</div>
+        <h1 class="nf-title">This page doesn't <em>exist.</em></h1>
+        <p class="nf-sub">It may have moved, or you may have followed a broken link.</p>
+        <a href="/index.html" class="nf-link">Back to home &rarr;</a>
+    </main>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        hamburger.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            hamburger.classList.toggle('is-open', isOpen);
+            hamburger.setAttribute('aria-expanded', isOpen);
+        });
+    </script>
+</body>
+</html>

@@ -4,7 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Contact P Sai Ramcharan Reddy — AI/ML Engineer open to remote internships.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Contact — P Sai Ramcharan Reddy">
+    <meta property="og:description" content="Open to remote internships in AI Engineering and Data Science. Based at IIT Gandhinagar.">
+    <meta property="og:url" content="https://randomartist22.github.io/contact.html">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Contact — P Sai Ramcharan Reddy">
+    <meta name="twitter:description" content="Open to remote internships in AI Engineering. Based at IIT Gandhinagar.">
+
     <title>Contact — Sai Ramcharan</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -193,14 +206,29 @@
     <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="works.html">Works</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="contact.html">Contact</a></li>
         <li>
             <a class="nav-disabled">
                 Blog <span class="nav-soon">soon</span>
             </a>
         </li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </button>
 </nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="works.html">Works</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a class="nav-disabled">Blog <span class="nav-soon">soon</span></a></li>
+    </ul>
+</div>
 
 <!-- ======== Contact Main ======== -->
 <main class="contact-page">
@@ -267,20 +295,47 @@
 <script>
     // ---- Scroll reveal ----
     const srEls = document.querySelectorAll('.sr');
-    const srObserver = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('in');
-                srObserver.unobserve(e.target);
-            }
-        });
+    const srObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); srObs.unobserve(e.target); } });
     }, { threshold: 0.1 });
-    srEls.forEach(el => srObserver.observe(el));
+    srEls.forEach(el => srObs.observe(el));
     window.addEventListener('load', () => {
-        srEls.forEach(el => {
-            if (el.getBoundingClientRect().top < window.innerHeight * 0.95)
-                el.classList.add('in');
-        });
+        srEls.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight * 0.95) el.classList.add('in'); });
+    });
+
+    // ---- Mobile hamburger ----
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('is-open', isOpen);
+        hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    document.addEventListener('click', e => {
+        if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+            mobileMenu.classList.remove('open');
+            hamburger.classList.remove('is-open');
+            hamburger.setAttribute('aria-expanded', false);
+        }
+    });
+
+    // ---- Page transitions ----
+    document.querySelectorAll('a[href]').forEach(a => {
+        const href = a.getAttribute('href');
+        if (href && !href.startsWith('http') && !href.startsWith('mailto') && !href.startsWith('#')) {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                document.body.classList.add('page-exit');
+                setTimeout(() => { window.location.href = a.href; }, 290);
+            });
+        }
+    });
+
+    // ---- Active nav ----
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
+        const lhref = link.getAttribute('href');
+        if (lhref && lhref === currentPage) link.classList.add('active');
     });
 </script>
 </body>

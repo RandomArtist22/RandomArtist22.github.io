@@ -273,9 +273,122 @@ img {
     color: var(--accent);
 }
 
+/* ---------- Page transitions ---------- */
+body {
+    transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+body.page-exit {
+    opacity: 0;
+    transform: translateY(-7px);
+    pointer-events: none;
+}
+
+/* ---------- Custom scrollbar ---------- */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background: var(--bg-3);
+    border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--ink-light); }
+
+/* ---------- Hamburger button ---------- */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    z-index: 201;
+}
+
+.hamburger-line {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background-color: var(--ink);
+    border-radius: 1px;
+    transform-origin: center;
+    transition: transform 0.35s var(--ease), opacity 0.25s ease;
+}
+
+.hamburger.is-open .hamburger-line:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+}
+.hamburger.is-open .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.hamburger.is-open .hamburger-line:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ---------- Mobile menu ---------- */
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgba(242, 244, 248, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--bg-3);
+    padding: 3rem 6vw 3.5rem;
+    z-index: 198;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.32s var(--ease-out), transform 0.32s var(--ease-out);
+    pointer-events: none;
+}
+
+.mobile-menu.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.mobile-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.mobile-menu ul li a {
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    transition: color 0.3s, font-style 0.3s;
+}
+
+.mobile-menu ul li a:hover,
+.mobile-menu ul li a.active {
+    color: var(--accent);
+    font-style: italic;
+}
+
+.mobile-menu ul li a.nav-disabled {
+    color: var(--ink-light);
+    pointer-events: none;
+    font-size: 1.8rem;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
     .nav-links {
         display: none;
+    }
+    .hamburger {
+        display: flex;
+    }
+    .mobile-menu {
+        display: block;
     }
 }
