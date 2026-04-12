@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<meta name="description" content="Blog — P Sai Ramcharan Reddy. Writing on AI engineering, building systems, and side projects.">
+<title>Blog — Sai Ramcharan</title>
+<style>
+.blog-header{padding:calc(70px + 10vh) 0 8vh;border-bottom:1px solid var(--bg-3)}
+.blog-title{font-family:var(--serif);font-size:clamp(4rem,8vw,7rem);font-weight:300;letter-spacing:-.03em;line-height:.9}
+.blog-title em{font-style:italic;color:var(--accent)}
+.blog-intro{font-size:1rem;color:var(--ink-mid);line-height:1.8;max-width:480px;margin-top:2rem}
+.posts-list{padding:6vh 0}
+.post-item{display:grid;grid-template-columns:130px 1fr;gap:3rem;padding:3vh 0;border-top:1px solid var(--bg-3);align-items:start}
+.post-item:last-child{border-bottom:1px solid var(--bg-3)}
+.pi-date{font-family:var(--mono);font-size:.75rem;color:var(--ink-light);padding-top:.35rem}
+.pi-title{font-family:var(--serif);font-size:1.8rem;font-weight:400;color:var(--ink);margin-bottom:.5rem;transition:color .3s,padding-left .4s cubic-bezier(.76,0,.24,1)}
+.pi-content a:hover .pi-title{color:var(--accent);padding-left:.3rem}
+.pi-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.4rem}
+.pi-tag{font-family:var(--mono);font-size:.67rem;border:1px solid var(--bg-3);border-radius:2px;padding:2px 8px;color:var(--ink-light)}
+.empty-state{padding:8vh 0;font-family:var(--serif);font-size:1.5rem;color:var(--ink-light);font-style:italic}
+@media(max-width:768px){.post-item{grid-template-columns:1fr;gap:.5rem}}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="../index.html" class="nav-logo"><div class="nav-dot"></div>sai-ramcharan</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../works.html">Works</a></li>
+    <li><a href="../contact.html">Contact</a></li>
+    <li><a href="index.html" class="active">Blog</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../works.html">Works</a></li>
+    <li><a href="../contact.html">Contact</a></li>
+    <li><a href="index.html">Blog</a></li>
+  </ul>
+</div>
+<header class="blog-header">
+  <div class="container">
+    <div class="section-label"><span class="section-label-text">Writing</span></div>
+    <h1 class="blog-title">Notes &amp;<br><em>Essays.</em></h1>
+    <p class="blog-intro">Writing on AI engineering, building systems, and things I learned from shipping the projects on the Works page.</p>
+  </div>
+</header>
+<main>
+  <div class="container"><div class="posts-list"><div class="post-item">
+  <div class="pi-date">2026-04-12</div>
+  <div class="pi-content">
+    <a href="hello-world.html">
+      <div class="pi-title">Hello World</div>
+    </a>
+    <div class="pi-tags"><span class="pi-tag">meta</span><span class="pi-tag">writing</span></div>
+  </div>
+</div></div></div>
+</main>
+<footer class="site-footer">
+  <div class="footer-copy">&copy; 2026 P Sai Ramcharan Reddy &mdash; IIT Gandhinagar</div>
+  <ul class="footer-links">
+    <li><a href="https://github.com/RandomArtist22" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/p-sai-ramcharan-reddy/" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li><a href="mailto:p.reddy@iitgn.ac.in">Email</a></li>
+  </ul>
+</footer>
+<script>
+const _h=document.getElementById('hamburger'),_m=document.getElementById('mobile-menu');
+_h.addEventListener('click',()=>{const o=_m.classList.toggle('open');_h.classList.toggle('is-open',o);_h.setAttribute('aria-expanded',o)});
+document.querySelectorAll('a[href]').forEach(a=>{const href=a.getAttribute('href');if(href&&!href.startsWith('http')&&!href.startsWith('mailto')&&!href.startsWith('#')){a.addEventListener('click',e=>{e.preventDefault();document.body.classList.add('page-exit');setTimeout(()=>window.location.href=a.href,260)})}});
+window.addEventListener('pageshow',()=>document.body.classList.remove('page-exit'));
+</script>
+</body>
+</html>
