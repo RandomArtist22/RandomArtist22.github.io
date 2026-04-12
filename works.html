@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Selected works — P Sai Ramcharan Reddy. AI systems, ML pipelines, and full-stack software.">
+    <title>Works — Sai Ramcharan</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ---- Page-specific: works.html ---- */
+
+        .page-header {
+            padding-top: calc(70px + 10vh);
+            padding-bottom: 8vh;
+            border-bottom: 1px solid var(--bg-3);
+        }
+
+        .page-header-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: end;
+        }
+
+        .page-title {
+            font-family: var(--serif);
+            font-size: clamp(4rem, 8vw, 7rem);
+            font-weight: 300;
+            letter-spacing: -0.03em;
+            line-height: 0.9;
+        }
+
+        .page-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .page-intro {
+            font-size: 1rem;
+            color: var(--ink-mid);
+            line-height: 1.8;
+            max-width: 480px;
+        }
+
+        /* ---- Work items ---- */
+        .works-container {
+            padding: 10vh 0;
+        }
+
+        .work-entry {
+            display: grid;
+            grid-template-columns: 80px 1fr 420px;
+            gap: 4rem;
+            padding: 5vh 0;
+            border-top: 1px solid var(--bg-3);
+            align-items: start;
+        }
+
+        .work-entry:last-child {
+            border-bottom: 1px solid var(--bg-3);
+        }
+
+        /* Left column: number */
+        .we-num {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            padding-top: 0.4rem;
+        }
+
+        /* Center: text */
+        .we-text { }
+
+        .we-title {
+            font-family: var(--serif);
+            font-size: 2.6rem;
+            font-weight: 400;
+            color: var(--ink);
+            margin-bottom: 1.5rem;
+            line-height: 1.05;
+        }
+
+        .we-desc {
+            font-size: 1rem;
+            color: var(--ink-mid);
+            line-height: 1.85;
+            max-width: 540px;
+            margin-bottom: 2rem;
+        }
+
+        .we-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .we-tag {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--ink-mid);
+            border: 1px solid var(--bg-3);
+            border-radius: 2px;
+            padding: 3px 10px;
+            letter-spacing: 0.04em;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .we-tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .we-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+            transition: border-color 0.3s, gap 0.3s var(--ease);
+        }
+
+        .we-link:hover {
+            border-color: var(--accent);
+            gap: 0.9rem;
+        }
+
+        /* Right column: minimal canvas visual */
+        .we-visual {
+            background-color: var(--bg-2);
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .we-visual canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .work-entry {
+                grid-template-columns: 60px 1fr;
+                gap: 2rem;
+            }
+            .we-visual {
+                grid-column: 1 / -1;
+                aspect-ratio: 16/7;
+            }
+            .work-entry {
+                /* reorder: num, visual, text */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header-inner {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .work-entry {
+                grid-template-columns: 1fr;
+            }
+            .we-num {
+                padding-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ======== Navigation ======== -->
+<nav class="site-nav">
+    <a href="index.html" class="nav-logo">
+        <div class="nav-dot"></div>
+        sai-ramcharan
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="works.html" class="active">Works</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+            <a class="nav-disabled">
+                Blog <span class="nav-soon">soon</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!-- ======== Page Header ======== -->
+<header class="page-header">
+    <div class="container">
+        <div class="page-header-inner">
+            <div class="section-label sr">
+                <span class="section-label-text">Selected work</span>
+            </div>
+        </div>
+        <h1 class="page-title sr sr-d1">
+            Things<br>I've <em>built.</em>
+        </h1>
+        <p class="page-intro sr sr-d2" style="margin-top: 3rem;">
+            Four production systems shipped in year one. Each one runs in the world, not just in a notebook.
+        </p>
+    </div>
+</header>
+
+<!-- ======== Works ======== -->
+<main class="works-container">
+    <div class="container">
+
+        <!-- 01: AI Explainer Reels Factory -->
+        <article class="work-entry sr" id="reels">
+            <div class="we-num">01 &mdash; 2025</div>
+            <div class="we-text">
+                <h2 class="we-title">AI Explainer Reels Factory</h2>
+                <p class="we-desc">
+                    An end-to-end pipeline that takes a topic prompt and returns a finished short-form educational video. The system chains LLM script planning, TTS voiceover synthesis, automated asset generation, subtitle burning, and Remotion video rendering into a single workflow. Exposed over FastAPI with a Streamlit control UI.
+                </p>
+                <p class="we-desc">
+                    The design goal was a real workflow — not a demo. Given a prompt, it handles every layer from script to final MP4 without human intervention.
+                </p>
+                <div class="we-stack">
+                    <span class="we-tag">FastAPI</span>
+                    <span class="we-tag">Streamlit</span>
+                    <span class="we-tag">Remotion</span>
+                    <span class="we-tag">LLM Orchestration</span>
+                    <span class="we-tag">TTS</span>
+                    <span class="we-tag">Asset Generation</span>
+                    <span class="we-tag">Python</span>
+                </div>
+                <a href="https://github.com/RandomArtist22/informational-reels" target="_blank" rel="noopener" class="we-link">
+                    View on GitHub &rarr;
+                </a>
+            </div>
+            <div class="we-visual">
+                <!-- Canvas: timeline frames / waveform -->
+                <canvas id="canvas-reels" aria-hidden="true"></canvas>
+            </div>
+        </article>
+
+        <!-- 02: Akshara OCR -->
+        <article class="work-entry sr" id="ocr">
+            <div class="we-num">02 &mdash; 2025</div>
+            <div class="we-text">
+                <h2 class="we-title">Akshara OCR</h2>
+                <p class="we-desc">
+                    A collaborative OCR system built for complex, styled documents. Runs local inference through PyTorch and ONNX to keep data on-device. Full backend API in FastAPI, React frontend, Docker-composed local stack. Includes JWT auth, async processing queues, and a test suite.
+                </p>
+                <p class="we-desc">
+                    This was a multi-person project with proper engineering discipline: code reviews, typed Python throughout, and a modular repo structure that actually scales.
+                </p>
+                <div class="we-stack">
+                    <span class="we-tag">PyTorch</span>
+                    <span class="we-tag">ONNX</span>
+                    <span class="we-tag">FastAPI</span>
+                    <span class="we-tag">React</span>
+                    <span class="we-tag">Docker</span>
+                    <span class="we-tag">JWT Auth</span>
+                    <span class="we-tag">Async</span>
+                </div>
+                <a href="https://github.com/JayHire06/akshara-ocr" target="_blank" rel="noopener" class="we-link">
+                    View on GitHub &rarr;
+                </a>
+            </div>
+            <div class="we-visual">
+                <!-- Canvas: scan-line grid -->
+                <canvas id="canvas-ocr" aria-hidden="true"></canvas>
+            </div>
+        </article>
+
+        <!-- 03: Jal Jeevan Trivia -->
+        <article class="work-entry sr" id="trivia">
+            <div class="we-num">03 &mdash; 2025</div>
+            <div class="we-text">
+                <h2 class="we-title">Jal Jeevan Trivia</h2>
+                <p class="we-desc">
+                    An offline-first quiz platform built for live events with unreliable networks. Three simultaneous views — host dashboard, player interface, projector display — kept in sync across real devices via WebSockets. Cloudflare tunnel support for zero-config public access.
+                </p>
+                <p class="we-desc">
+                    Shipped and used at an actual event. The multi-screen sync with low-latency state propagation was the core engineering challenge.
+                </p>
+                <div class="we-stack">
+                    <span class="we-tag">Node.js</span>
+                    <span class="we-tag">WebSockets</span>
+                    <span class="we-tag">Offline-first</span>
+                    <span class="we-tag">Cloudflare Tunnels</span>
+                    <span class="we-tag">Multi-screen</span>
+                    <span class="we-tag">Real-time</span>
+                </div>
+                <a href="https://github.com/RandomArtist22/jal-jeevan-trivia" target="_blank" rel="noopener" class="we-link">
+                    View on GitHub &rarr;
+                </a>
+            </div>
+            <div class="we-visual">
+                <!-- Canvas: sparse node graph -->
+                <canvas id="canvas-trivia" aria-hidden="true"></canvas>
+            </div>
+        </article>
+
+        <!-- 04: markd2pdf -->
+        <article class="work-entry sr" id="markd2pdf">
+            <div class="we-num">04 &mdash; 2025</div>
+            <div class="we-text">
+                <h2 class="we-title">markd2pdf</h2>
+                <p class="we-desc">
+                    A command-line tool that converts Markdown files into well-styled, print-ready PDFs. Built with Typer for the CLI layer and WeasyPrint for rendering. Supports multiple themes, syntax highlighting, tables, footnotes, and batch-mode directory conversion.
+                </p>
+                <p class="we-desc">
+                    The kind of developer tool you find yourself actually reaching for. Typed Python throughout, proper packaging, and installable via pip.
+                </p>
+                <div class="we-stack">
+                    <span class="we-tag">Python</span>
+                    <span class="we-tag">Typer</span>
+                    <span class="we-tag">WeasyPrint</span>
+                    <span class="we-tag">CLI</span>
+                    <span class="we-tag">Packaging</span>
+                    <span class="we-tag">Syntax Highlighting</span>
+                </div>
+                <a href="https://github.com/RandomArtist22/md2pdf" target="_blank" rel="noopener" class="we-link">
+                    View on GitHub &rarr;
+                </a>
+            </div>
+            <div class="we-visual">
+                <!-- Canvas: text lines -->
+                <canvas id="canvas-markd" aria-hidden="true"></canvas>
+            </div>
+        </article>
+
+    </div>
+</main>
+
+<!-- ======== Footer ======== -->
+<footer class="site-footer">
+    <div class="footer-copy">
+        &copy; 2026 P Sai Ramcharan Reddy &mdash; IIT Gandhinagar
+    </div>
+    <ul class="footer-links">
+        <li><a href="https://github.com/RandomArtist22" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/p-sai-ramcharan-reddy/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="mailto:p.reddy@iitgn.ac.in">Email</a></li>
+    </ul>
+</footer>
+
+<script>
+    // ---- Scroll reveal ----
+    const srEls = document.querySelectorAll('.sr');
+    const srObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('in');
+                srObserver.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.08 });
+    srEls.forEach(el => srObserver.observe(el));
+    window.addEventListener('load', () => {
+        srEls.forEach(el => {
+            if (el.getBoundingClientRect().top < window.innerHeight * 0.95) el.classList.add('in');
+        });
+    });
+
+    // ---- Minimal canvas visuals per project ----
+    const ACC = [76, 127, 166]; // accent RGB
+
+    function initCanvas(id) {
+        const canvas = document.getElementById(id);
+        if (!canvas) return null;
+        const ctx = canvas.getContext('2d');
+        const setSize = () => {
+            canvas.width  = canvas.clientWidth  * devicePixelRatio;
+            canvas.height = canvas.clientHeight * devicePixelRatio;
+            ctx.scale(devicePixelRatio, devicePixelRatio);
+        };
+        setSize();
+        window.addEventListener('resize', setSize);
+        return { canvas, ctx, W: () => canvas.clientWidth, H: () => canvas.clientHeight };
+    }
+
+    // --- Canvas 1: AI Reels — horizontal timeline frames ---
+    (function() {
+        const c = initCanvas('canvas-reels');
+        if (!c) return;
+        let t = 0;
+
+        function draw() {
+            const { ctx } = c;
+            const W = c.W(), H = c.H();
+            ctx.clearRect(0, 0, W, H);
+
+            const frameCount = 7;
+            const gap = W / (frameCount + 1);
+
+            for (let i = 0; i < frameCount; i++) {
+                const x = gap * (i + 1);
+                const frameH  = H * 0.45;
+                const frameW  = gap * 0.6;
+                const yCenter = H * 0.5;
+
+                // Frame rect
+                const alpha = 0.12 + 0.06 * Math.sin(t * 0.7 + i * 0.9);
+                ctx.strokeStyle = `rgba(${ACC}, ${alpha * 2})`;
+                ctx.lineWidth = 1;
+                ctx.strokeRect(x - frameW / 2, yCenter - frameH / 2, frameW, frameH);
+
+                // Waveform inside
+                ctx.beginPath();
+                const segments = 20;
+                for (let s = 0; s <= segments; s++) {
+                    const px = x - frameW / 2 + (s / segments) * frameW;
+                    const amp = frameH * 0.25 * (0.4 + 0.6 * Math.abs(Math.sin(s * 0.8 + t + i)));
+                    const py  = yCenter + amp * Math.sin(s * 1.2 + t * 1.3 + i);
+                    s === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+                }
+                ctx.strokeStyle = `rgba(${ACC}, ${0.25 + 0.1 * Math.sin(t + i)})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                // Horizontal guide line
+                ctx.beginPath();
+                ctx.moveTo(x - frameW / 2, yCenter);
+                ctx.lineTo(x + frameW / 2, yCenter);
+                ctx.strokeStyle = `rgba(${ACC}, 0.08)`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+
+            // Timeline spine
+            ctx.beginPath();
+            ctx.moveTo(gap * 0.5, H * 0.5);
+            ctx.lineTo(gap * (frameCount + 0.5), H * 0.5);
+            ctx.strokeStyle = `rgba(${ACC}, 0.12)`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            t += 0.018;
+            requestAnimationFrame(draw);
+        }
+        draw();
+    })();
+
+    // --- Canvas 2: OCR — scan-line grid ---
+    (function() {
+        const c = initCanvas('canvas-ocr');
+        if (!c) return;
+        let t = 0;
+
+        function draw() {
+            const { ctx } = c;
+            const W = c.W(), H = c.H();
+            ctx.clearRect(0, 0, W, H);
+
+            const cols = 16, rows = 10;
+            const cw = W / cols, ch = H / rows;
+            const scanY = (Math.sin(t * 0.4) * 0.5 + 0.5) * H;
+
+            // Grid
+            for (let r = 0; r <= rows; r++) {
+                for (let col = 0; col <= cols; col++) {
+                    const x = col * cw, y = r * ch;
+                    const dist = Math.abs(y - scanY);
+                    const glow = Math.max(0, 1 - dist / (H * 0.28));
+
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0); ctx.lineTo(x, H);
+                    ctx.strokeStyle = `rgba(${ACC}, ${0.04 + glow * 0.12})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+                const y = r * ch;
+                const dist = Math.abs(y - scanY);
+                const glow = Math.max(0, 1 - dist / (H * 0.28));
+                ctx.beginPath();
+                ctx.moveTo(0, y); ctx.lineTo(W, y);
+                ctx.strokeStyle = `rgba(${ACC}, ${0.04 + glow * 0.12})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+
+            // Scan line
+            ctx.beginPath();
+            ctx.moveTo(0, scanY);
+            ctx.lineTo(W, scanY);
+            ctx.strokeStyle = `rgba(${ACC}, 0.35)`;
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            // Glow line
+            const grad = ctx.createLinearGradient(0, scanY - 20, 0, scanY + 20);
+            grad.addColorStop(0,   `rgba(${ACC}, 0)`);
+            grad.addColorStop(0.5, `rgba(${ACC}, 0.08)`);
+            grad.addColorStop(1,   `rgba(${ACC}, 0)`);
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, scanY - 20, W, 40);
+
+            t += 0.015;
+            requestAnimationFrame(draw);
+        }
+        draw();
+    })();
+
+    // --- Canvas 3: Trivia — sparse node graph ---
+    (function() {
+        const c = initCanvas('canvas-trivia');
+        if (!c) return;
+        let t = 0;
+
+        // Fixed relative positions (0-1 normalized)
+        const nodePositions = [
+            [0.2, 0.5], [0.4, 0.25], [0.5, 0.7], [0.65, 0.35],
+            [0.8, 0.6], [0.35, 0.55], [0.75, 0.2],
+        ];
+        const edges = [
+            [0,1],[0,2],[1,3],[2,4],[3,4],[1,5],[3,6],[4,6],[2,5],[5,3]
+        ];
+
+        function draw() {
+            const { ctx } = c;
+            const W = c.W(), H = c.H();
+            ctx.clearRect(0, 0, W, H);
+
+            const nodes = nodePositions.map(([rx, ry], i) => ({
+                x: rx * W + Math.sin(t * 0.5 + i * 1.3) * W * 0.02,
+                y: ry * H + Math.cos(t * 0.4 + i * 1.1) * H * 0.025,
+            }));
+
+            // Draw edges
+            edges.forEach(([a, b], idx) => {
+                const na = nodes[a], nb = nodes[b];
+                const pulse = 0.5 + 0.5 * Math.sin(t * 1.2 + idx * 0.7);
+                ctx.beginPath();
+                ctx.moveTo(na.x, na.y); ctx.lineTo(nb.x, nb.y);
+                ctx.strokeStyle = `rgba(${ACC}, ${0.08 + pulse * 0.1})`;
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+            });
+
+            // Draw nodes
+            nodes.forEach((n, i) => {
+                const pulse = 0.5 + 0.5 * Math.sin(t + i * 0.9);
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, 3 + pulse * 2, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${ACC}, ${0.3 + pulse * 0.3})`;
+                ctx.fill();
+
+                // Outer ring
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, 6 + pulse * 4, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(${ACC}, ${0.05 + pulse * 0.07})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            });
+
+            t += 0.016;
+            requestAnimationFrame(draw);
+        }
+        draw();
+    })();
+
+    // --- Canvas 4: markd2pdf — text lines ---
+    (function() {
+        const c = initCanvas('canvas-markd');
+        if (!c) return;
+        let t = 0;
+
+        const lineWidths = [0.75, 0.5, 0.85, 0.45, 0.7, 0.3, 0.6, 0.9, 0.5, 0.65, 0.4, 0.8];
+
+        function draw() {
+            const { ctx } = c;
+            const W = c.W(), H = c.H();
+            ctx.clearRect(0, 0, W, H);
+
+            const lineCount = lineWidths.length;
+            const lineSpacing = H / (lineCount + 1);
+            const margin = W * 0.12;
+
+            lineWidths.forEach((rel, i) => {
+                // Stagger-in animation
+                const progress = Math.min(1, Math.max(0, (t * 0.7 - i * 0.08)));
+                const lineW = rel * (W - margin * 2) * progress;
+                const y = lineSpacing * (i + 1);
+
+                ctx.beginPath();
+                ctx.moveTo(margin, y);
+                ctx.lineTo(margin + lineW, y);
+
+                // First line is "heading" — slightly brighter
+                const alpha = i === 0 ? 0.35 : (i === 3 ? 0.28 : 0.15);
+                const h = i === 0 ? 1.5 : 0.8;
+                ctx.strokeStyle = `rgba(${ACC}, ${alpha})`;
+                ctx.lineWidth = h;
+                ctx.stroke();
+
+                // Cursor blink on last drawn line
+                if (progress > 0 && progress < 1) {
+                    const blink = Math.sin(t * 8) > 0 ? 0.6 : 0;
+                    ctx.fillStyle = `rgba(${ACC}, ${blink})`;
+                    ctx.fillRect(margin + lineW, y - 6, 1.5, 10);
+                }
+            });
+
+            // Loop: reset after all lines are drawn
+            if (t > lineCount * 0.08 + 2.5) t = 0;
+            t += 0.02;
+            requestAnimationFrame(draw);
+        }
+        draw();
+    })();
+</script>
+</body>
+</html>

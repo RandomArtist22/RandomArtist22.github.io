@@ -1,0 +1,281 @@
+/* ================================================
+   SHARED STYLESHEET — P Sai Ramcharan Reddy
+   Japanese Minimalist / AI Engineering Portfolio
+   ================================================ */
+
+/* ---------- Tokens ---------- */
+:root {
+    /* Cool off-white palette */
+    --bg:        #F2F4F8;
+    --bg-2:      #E7EAF1;
+    --bg-3:      #DDE0EA;
+
+    /* Cool ink */
+    --ink:       #1C1E27;
+    --ink-mid:   #4A4E5E;
+    --ink-light: #8890A4;
+
+    /* Muted slate-blue accent */
+    --accent:    #4C7FA6;
+    --accent-2:  rgba(76, 127, 166, 0.10);
+    --accent-3:  rgba(76, 127, 166, 0.06);
+
+    /* Typography */
+    --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono:  'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+    /* Easing */
+    --ease:     cubic-bezier(0.76, 0, 0.24, 1);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+    background-color: var(--ink);
+    color: var(--bg);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* ---------- Layout ---------- */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 6vw;
+}
+
+/* ---------- Navigation ---------- */
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 200;
+    padding: 0 6vw;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Glassmorphism — very subtle, fits the cool palette */
+    background: rgba(242, 244, 248, 0.80);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(28, 30, 39, 0.06);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    transition: opacity 0.3s;
+}
+
+.nav-logo:hover {
+    opacity: 0.6;
+}
+
+.nav-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    flex-shrink: 0;
+    transition: transform 0.4s var(--ease);
+}
+
+.nav-logo:hover .nav-dot {
+    transform: scale(1.6);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    list-style: none;
+}
+
+.nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    position: relative;
+    padding-bottom: 3px;
+    transition: color 0.3s;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--accent);
+    transition: width 0.4s var(--ease);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--ink);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-links a.nav-disabled {
+    color: var(--ink-light);
+    cursor: default;
+    pointer-events: none;
+}
+
+.nav-links a.nav-disabled::after { display: none; }
+
+.nav-soon {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--ink-light);
+    border: 1px solid var(--bg-3);
+    border-radius: 20px;
+    padding: 1px 7px;
+    margin-left: 6px;
+    vertical-align: middle;
+    letter-spacing: 0.04em;
+}
+
+/* ---------- Scroll Reveal ---------- */
+.sr {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+
+.sr.in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Delay helpers */
+.sr-d1 { transition-delay: 0.1s; }
+.sr-d2 { transition-delay: 0.2s; }
+.sr-d3 { transition-delay: 0.3s; }
+.sr-d4 { transition-delay: 0.4s; }
+.sr-d5 { transition-delay: 0.5s; }
+
+/* ---------- Section headers ---------- */
+.section-label {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 5vh;
+}
+
+.section-label::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background-color: var(--accent);
+    flex-shrink: 0;
+}
+
+.section-label-text {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+}
+
+.section-title {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 2rem;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+    border-top: 1px solid var(--bg-3);
+    padding: 2.5rem 6vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-copy {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    letter-spacing: 0.04em;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.footer-links a {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    letter-spacing: 0.04em;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--accent);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+}

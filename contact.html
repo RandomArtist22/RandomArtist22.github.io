@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact P Sai Ramcharan Reddy — AI/ML Engineer open to remote internships.">
+    <title>Contact — Sai Ramcharan</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ---- Page-specific: contact.html ---- */
+
+        .contact-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: calc(70px + 12vh) 6vw 10vh;
+        }
+
+        /* Big CTA email */
+        .contact-heading {
+            font-family: var(--serif);
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 300;
+            color: var(--ink-mid);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-email-link {
+            display: block;
+            font-family: var(--serif);
+            font-size: clamp(2.8rem, 7vw, 6.5rem);
+            font-weight: 300;
+            color: var(--ink);
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+            margin-bottom: 4rem;
+            position: relative;
+            width: fit-content;
+            transition: color 0.4s var(--ease);
+        }
+
+        .contact-email-link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.6s var(--ease);
+        }
+
+        .contact-email-link:hover {
+            color: var(--accent);
+        }
+
+        .contact-email-link:hover::after {
+            width: 100%;
+        }
+
+        /* Status bar */
+        .contact-status-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 4rem;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--ink-mid);
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: #5cba8e; /* Soft green — available */
+            animation: pulse-dot 2.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(92, 186, 142, 0.45); }
+            50%       { box-shadow: 0 0 0 6px rgba(92, 186, 142, 0);  }
+        }
+
+        /* Social links grid */
+        .contact-links-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 180px);
+            gap: 2px;
+            margin-bottom: 6rem;
+        }
+
+        .contact-link-item {
+            padding: 2rem 0;
+            border-top: 1px solid var(--bg-3);
+        }
+
+        .contact-link-item:nth-child(-n+3) {
+            /* no extra styling needed for first row */
+        }
+
+        .cli-label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--ink-light);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .cli-value {
+            font-family: var(--serif);
+            font-size: 1.4rem;
+            color: var(--ink);
+            position: relative;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+
+        .cli-value::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--ink);
+            transition: width 0.4s var(--ease);
+        }
+
+        .contact-link-item:hover .cli-value {
+            color: var(--accent);
+        }
+
+        .contact-link-item:hover .cli-value::after {
+            width: 100%;
+            background-color: var(--accent);
+        }
+
+        /* Right-side note */
+        .contact-note {
+            max-width: 480px;
+        }
+
+        .contact-note-text {
+            font-size: 1rem;
+            color: var(--ink-mid);
+            line-height: 1.85;
+        }
+
+        /* Two-col layout for links + note */
+        .contact-bottom {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10vw;
+            align-items: start;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-links-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .contact-bottom {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ======== Navigation ======== -->
+<nav class="site-nav">
+    <a href="index.html" class="nav-logo">
+        <div class="nav-dot"></div>
+        sai-ramcharan
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="works.html">Works</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li>
+            <a class="nav-disabled">
+                Blog <span class="nav-soon">soon</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!-- ======== Contact Main ======== -->
+<main class="contact-page">
+    <div class="contact-main">
+
+        <div class="section-label sr">
+            <span class="section-label-text">Let's talk</span>
+        </div>
+
+        <p class="contact-heading sr sr-d1">
+            Open to remote internships in AI Engineering &amp; Data Science
+        </p>
+
+        <a href="mailto:p.reddy@iitgn.ac.in" class="contact-email-link sr sr-d2">
+            p.reddy<br>@iitgn.ac.in
+        </a>
+
+        <div class="contact-status-bar sr sr-d3">
+            <span class="status-dot"></span>
+            Available &mdash; Response usually within 24 hours
+        </div>
+
+        <div class="contact-bottom sr sr-d4">
+            <div class="contact-links-grid">
+                <a href="https://github.com/RandomArtist22" target="_blank" rel="noopener" class="contact-link-item">
+                    <span class="cli-label">Code</span>
+                    <span class="cli-value">GitHub &nearr;</span>
+                </a>
+                <a href="https://www.linkedin.com/in/p-sai-ramcharan-reddy/" target="_blank" rel="noopener" class="contact-link-item">
+                    <span class="cli-label">Network</span>
+                    <span class="cli-value">LinkedIn &nearr;</span>
+                </a>
+                <a href="#" class="contact-link-item" aria-label="Resume">
+                    <span class="cli-label">Document</span>
+                    <span class="cli-value">Resume &nearr;</span>
+                </a>
+            </div>
+
+            <div class="contact-note">
+                <p class="contact-note-text">
+                    I'm a first-year BTech AI student at IIT Gandhinagar building production AI systems. If you're working on something that involves language models, ML infrastructure, or full-stack AI products, I'd like to hear about it.
+                </p>
+                <p class="contact-note-text" style="margin-top: 1rem;">
+                    Remote arrangements work well. I respond to email.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-copy">
+            &copy; 2026 P Sai Ramcharan Reddy &mdash; IIT Gandhinagar
+        </div>
+        <ul class="footer-links">
+            <li><a href="https://github.com/RandomArtist22" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/p-sai-ramcharan-reddy/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="mailto:p.reddy@iitgn.ac.in">Email</a></li>
+        </ul>
+    </footer>
+</main>
+
+<script>
+    // ---- Scroll reveal ----
+    const srEls = document.querySelectorAll('.sr');
+    const srObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('in');
+                srObserver.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    srEls.forEach(el => srObserver.observe(el));
+    window.addEventListener('load', () => {
+        srEls.forEach(el => {
+            if (el.getBoundingClientRect().top < window.innerHeight * 0.95)
+                el.classList.add('in');
+        });
+    });
+</script>
+</body>
+</html>

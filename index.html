@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="P Sai Ramcharan Reddy — AI/ML Engineer and builder based at IIT Gandhinagar. Building production-grade AI systems and software.">
+    <title>Sai Ramcharan — AI Engineer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ---- Page-specific: index.html ---- */
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding-bottom: 12vh;
+            padding-top: 70px; /* nav height */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Canvas sits behind everything */
+        #hero-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.55;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 1px;
+            background-color: var(--accent);
+        }
+
+        .hero-name {
+            font-family: var(--serif);
+            font-size: clamp(4.5rem, 12vw, 10rem);
+            font-weight: 300;
+            line-height: 0.88;
+            letter-spacing: -0.03em;
+            color: var(--ink);
+            margin-bottom: 4rem;
+        }
+
+        .hero-name em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-foot {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 800px;
+        }
+
+        .hero-tagline {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--ink-mid);
+            line-height: 1.7;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 0.6rem;
+        }
+
+        .hero-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            color: var(--ink-light);
+        }
+
+        .hero-meta-row span.label {
+            color: var(--ink-mid);
+        }
+
+        .hero-scroll-hint {
+            position: absolute;
+            bottom: 3.5rem;
+            right: 6vw;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--ink-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2;
+        }
+
+        .hero-scroll-hint::before {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 50px;
+            background-color: var(--ink-light);
+            animation: scrollline 1.8s var(--ease-out) infinite;
+        }
+
+        @keyframes scrollline {
+            0%   { transform: scaleY(0); transform-origin: top; }
+            45%  { transform: scaleY(1); transform-origin: top; }
+            55%  { transform: scaleY(1); transform-origin: bottom; }
+            100% { transform: scaleY(0); transform-origin: bottom; }
+        }
+
+        /* ---- About strip ---- */
+        .about-strip {
+            padding: 12vh 0;
+            border-top: 1px solid var(--bg-3);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .about-statement {
+            font-family: var(--serif);
+            font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+            font-weight: 400;
+            line-height: 1.3;
+            color: var(--ink);
+            padding-top: 0.5rem;
+        }
+
+        .about-statement em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .about-body {
+            font-size: 1.05rem;
+            color: var(--ink-mid);
+            line-height: 1.9;
+        }
+
+        .about-body p + p {
+            margin-top: 1.2rem;
+        }
+
+        /* ---- Selected work preview ---- */
+        .work-preview {
+            padding: 12vh 0;
+            border-top: 1px solid var(--bg-3);
+        }
+
+        .work-preview-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 5vh;
+        }
+
+        .view-all-link {
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s var(--ease);
+        }
+
+        .view-all-link:hover {
+            gap: 1rem;
+        }
+
+        /* Two-column list of work items */
+        .work-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+        }
+
+        .work-list-item {
+            display: block;
+            padding: 2.5rem 0;
+            border-top: 1px solid var(--bg-3);
+            transition: background 0.3s;
+        }
+
+        .work-list-item:hover {
+            background: transparent;
+        }
+
+        .wli-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .wli-num {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+        }
+
+        .wli-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .wli-tag {
+            font-family: var(--mono);
+            font-size: 0.67rem;
+            color: var(--ink-light);
+            border: 1px solid var(--bg-3);
+            border-radius: 2px;
+            padding: 2px 8px;
+            letter-spacing: 0.04em;
+        }
+
+        .wli-title {
+            font-family: var(--serif);
+            font-size: 1.7rem;
+            font-weight: 400;
+            color: var(--ink);
+            margin-bottom: 0.6rem;
+            transition: color 0.3s;
+        }
+
+        .work-list-item:hover .wli-title {
+            color: var(--accent);
+        }
+
+        .wli-desc {
+            font-size: 0.92rem;
+            color: var(--ink-light);
+            line-height: 1.65;
+        }
+
+        /* Odd items get right padding for spacing in the grid */
+        .work-list-item:nth-child(odd) {
+            padding-right: 4rem;
+        }
+
+        /* ---- Misc: divider ---- */
+        .hr-thin {
+            border: none;
+            border-top: 1px solid var(--bg-3);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .work-list {
+                grid-template-columns: 1fr;
+            }
+            .work-list-item:nth-child(odd) {
+                padding-right: 0;
+            }
+            .hero-foot {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ======== Navigation ======== -->
+<nav class="site-nav">
+    <a href="index.html" class="nav-logo">
+        <div class="nav-dot"></div>
+        sai-ramcharan
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="works.html">Works</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+            <a class="nav-disabled">
+                Blog <span class="nav-soon">soon</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!-- ======== Hero ======== -->
+<section class="hero">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+    <div class="container hero-content">
+        <!-- Scroll hint -->
+        <div class="hero-scroll-hint" aria-hidden="true">scroll</div>
+
+        <div class="hero-eyebrow sr">
+            AI / ML Engineer
+        </div>
+
+        <h1 class="hero-name sr sr-d1">
+            P Sai<br>
+            Ramcharan<br>
+            <em>Reddy.</em>
+        </h1>
+
+        <div class="hero-foot sr sr-d2">
+            <p class="hero-tagline">
+                Building production-grade AI systems at IIT Gandhinagar.
+                Full-stack by approach, ML-first by design.
+            </p>
+            <div class="hero-meta">
+                <div class="hero-meta-row">
+                    <span class="label">Base</span>
+                    IIT Gandhinagar
+                </div>
+                <div class="hero-meta-row">
+                    <span class="label">Focus</span>
+                    LLMs, Pipelines, Full-stack AI
+                </div>
+                <div class="hero-meta-row">
+                    <span class="label">Status</span>
+                    Open to remote internships
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======== About Strip ======== -->
+<section class="about-strip">
+    <div class="container">
+        <div class="about-grid">
+            <div class="sr">
+                <div class="section-label">
+                    <span class="section-label-text">About</span>
+                </div>
+                <p class="about-statement">
+                    I don't just study AI.<br>
+                    <em>I ship it.</em>
+                </p>
+            </div>
+            <div class="sr sr-d1">
+                <p class="about-body">
+                    Four production-ready systems built in year one at IITGN. My work sits at the intersection of language models, automated pipelines, and real interfaces that people actually use.
+                </p>
+                <p class="about-body">
+                    I work end-to-end: API design, inference optimization, frontend delivery. The goal is always software that runs in the world, not notebooks that only run on my machine.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======== Work Preview ======== -->
+<section class="work-preview">
+    <div class="container">
+        <div class="work-preview-header">
+            <div class="section-label sr">
+                <span class="section-label-text">Selected Work</span>
+            </div>
+            <a href="works.html" class="view-all-link sr sr-d1">
+                All projects &rarr;
+            </a>
+        </div>
+
+        <div class="work-list">
+
+            <a href="works.html#reels" class="work-list-item sr">
+                <div class="wli-top">
+                    <span class="wli-num">01</span>
+                    <div class="wli-tags">
+                        <span class="wli-tag">LLM</span>
+                        <span class="wli-tag">Video</span>
+                        <span class="wli-tag">Pipeline</span>
+                    </div>
+                </div>
+                <div class="wli-title">AI Explainer Reels Factory</div>
+                <p class="wli-desc">End-to-end pipeline turning a prompt into a finished educational video. LLM planning, TTS, asset generation, and Remotion rendering wired together.</p>
+            </a>
+
+            <a href="works.html#ocr" class="work-list-item sr sr-d1">
+                <div class="wli-top">
+                    <span class="wli-num">02</span>
+                    <div class="wli-tags">
+                        <span class="wli-tag">PyTorch</span>
+                        <span class="wli-tag">ONNX</span>
+                        <span class="wli-tag">React</span>
+                    </div>
+                </div>
+                <div class="wli-title">Akshara OCR</div>
+                <p class="wli-desc">Team-built OCR framework for complex documents. FastAPI, React, Docker, local inference with PyTorch and ONNX.</p>
+            </a>
+
+            <a href="works.html#trivia" class="work-list-item sr sr-d2">
+                <div class="wli-top">
+                    <span class="wli-num">03</span>
+                    <div class="wli-tags">
+                        <span class="wli-tag">WebSockets</span>
+                        <span class="wli-tag">Offline-first</span>
+                        <span class="wli-tag">Node.js</span>
+                    </div>
+                </div>
+                <div class="wli-title">Jal Jeevan Trivia</div>
+                <p class="wli-desc">Offline-first live quiz platform with three simultaneous views synced over WebSockets. Shipped and used at a real event.</p>
+            </a>
+
+            <a href="works.html#markd2pdf" class="work-list-item sr sr-d3">
+                <div class="wli-top">
+                    <span class="wli-num">04</span>
+                    <div class="wli-tags">
+                        <span class="wli-tag">CLI</span>
+                        <span class="wli-tag">Python</span>
+                        <span class="wli-tag">Typer</span>
+                    </div>
+                </div>
+                <div class="wli-title">markd2pdf</div>
+                <p class="wli-desc">CLI tool converting Markdown to print-ready PDFs. Typed Python, custom themes, syntax highlighting, and batch processing.</p>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- ======== Footer ======== -->
+<footer class="site-footer">
+    <div class="footer-copy">
+        &copy; 2026 P Sai Ramcharan Reddy &mdash; IIT Gandhinagar
+    </div>
+    <ul class="footer-links">
+        <li><a href="https://github.com/RandomArtist22" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/p-sai-ramcharan-reddy/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="mailto:p.reddy@iitgn.ac.in">Email</a></li>
+    </ul>
+</footer>
+
+<script>
+    // ---- Scroll reveal ----
+    const srEls = document.querySelectorAll('.sr');
+    const srObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in');
+                srObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    srEls.forEach(el => srObserver.observe(el));
+
+    // Trigger immediately-visible elements
+    window.addEventListener('load', () => {
+        srEls.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.9) {
+                el.classList.add('in');
+            }
+        });
+    });
+
+    // ---- Hero canvas: sparse floating ink-dot field ----
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Accent color components for drawing
+    const DOT_COLOR = '76, 127, 166';
+    const LINE_COLOR = '76, 127, 166';
+
+    let W, H, points, raf;
+
+    function resize() {
+        W = canvas.clientWidth;
+        H = canvas.clientHeight;
+        canvas.width  = W * devicePixelRatio;
+        canvas.height = H * devicePixelRatio;
+        ctx.scale(devicePixelRatio, devicePixelRatio);
+        buildPoints();
+    }
+
+    function buildPoints() {
+        // Density scales with viewport — stays sparse
+        const count = Math.max(20, Math.floor(W * H / 22000));
+        points = Array.from({ length: count }, () => ({
+            x:  Math.random() * W,
+            y:  Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.22,
+            vy: (Math.random() - 0.5) * 0.22,
+            r:  Math.random() * 1.4 + 0.8,
+        }));
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+        const LINK_DIST = W * 0.14; // connection threshold
+
+        for (let i = 0; i < points.length; i++) {
+            const p = points[i];
+            p.x += p.vx;
+            p.y += p.vy;
+
+            // Gentle bounce
+            if (p.x < 0 || p.x > W) { p.vx *= -1; p.x = Math.max(0, Math.min(W, p.x)); }
+            if (p.y < 0 || p.y > H) { p.vy *= -1; p.y = Math.max(0, Math.min(H, p.y)); }
+
+            // Draw thin connection lines
+            for (let j = i + 1; j < points.length; j++) {
+                const q = points[j];
+                const dx = p.x - q.x, dy = p.y - q.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < LINK_DIST) {
+                    const alpha = (1 - dist / LINK_DIST) * 0.18;
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(q.x, q.y);
+                    ctx.strokeStyle = `rgba(${LINE_COLOR}, ${alpha})`;
+                    ctx.lineWidth = 0.6;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // Draw dots on top
+        for (const p of points) {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${DOT_COLOR}, 0.45)`;
+            ctx.fill();
+        }
+
+        raf = requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', () => {
+        cancelAnimationFrame(raf);
+        resize();
+        raf = requestAnimationFrame(draw);
+    });
+
+    resize();
+    draw();
+
+    // ---- Nav active state ----
+    const navLinks = document.querySelectorAll('.nav-links a:not(.nav-disabled)');
+    navLinks.forEach(link => {
+        if (link.href === window.location.href) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+</script>
+</body>
+</html>
