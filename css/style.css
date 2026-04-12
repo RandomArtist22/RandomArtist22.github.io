@@ -274,13 +274,22 @@ img {
 }
 
 /* ---------- Page transitions ---------- */
+@keyframes page-enter {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
 body {
-    transition: opacity 0.28s ease, transform 0.28s ease;
+    /* Every page load: gentle fade-in */
+    animation: page-enter 0.4s ease forwards;
 }
 
 body.page-exit {
+    /* Navigating away: fade out and lift */
+    animation: none; /* stop any entry animation */
     opacity: 0;
     transform: translateY(-7px);
+    transition: opacity 0.26s ease, transform 0.26s ease;
     pointer-events: none;
 }
 

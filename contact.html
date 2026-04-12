@@ -326,10 +326,11 @@
             a.addEventListener('click', e => {
                 e.preventDefault();
                 document.body.classList.add('page-exit');
-                setTimeout(() => { window.location.href = a.href; }, 290);
+                setTimeout(() => { window.location.href = a.href; }, 260);
             });
         }
     });
+    window.addEventListener('pageshow', () => document.body.classList.remove('page-exit'));
 
     // ---- Active nav ----
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
