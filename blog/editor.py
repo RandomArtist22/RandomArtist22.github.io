@@ -152,7 +152,7 @@ def all_posts() -> list:
 
 # ── HTML templates ────────────────────────────────────────────────────────────
 _NAV = """<nav class="site-nav">
-  <a href="../index.html" class="nav-logo"><div class="nav-dot"></div>sai-ramcharan</a>
+  <a href="../index.html" class="nav-logo"><div class="nav-dot"></div>randomartist22</a>
   <ul class="nav-links">
     <li><a href="../index.html">Home</a></li>
     <li><a href="../works.html">Works</a></li>
@@ -192,7 +192,7 @@ _FOOTER = """<footer class="site-footer">
   <div class="footer-copy">&copy; 2026 P Sai Ramcharan Reddy &mdash; IIT Gandhinagar</div>
   <ul class="footer-links">
     <li><a href="https://github.com/RandomArtist22" target="_blank" rel="noopener">GitHub</a></li>
-    <li><a href="https://www.linkedin.com/in/p-sai-ramcharan-reddy/" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li><a href="https://www.linkedin.com/in/p-randomartist22-reddy/" target="_blank" rel="noopener">LinkedIn</a></li>
     <li><a href="mailto:p.reddy@iitgn.ac.in">Email</a></li>
   </ul>
 </footer>"""
