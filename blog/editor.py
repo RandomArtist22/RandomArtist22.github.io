@@ -192,7 +192,7 @@ _FOOTER = """<footer class="site-footer">
   <div class="footer-copy">&copy; 2026 P Sai Ramcharan Reddy &mdash; IIT Gandhinagar</div>
   <ul class="footer-links">
     <li><a href="https://github.com/RandomArtist22" target="_blank" rel="noopener">GitHub</a></li>
-    <li><a href="https://www.linkedin.com/in/p-randomartist22-reddy/" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li><a href="https://www.linkedin.com/in/p-sai-ramcharan-reddy/" target="_blank" rel="noopener">LinkedIn</a></li>
     <li><a href="mailto:p.reddy@iitgn.ac.in">Email</a></li>
   </ul>
 </footer>"""
