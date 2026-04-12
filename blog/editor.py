@@ -409,7 +409,19 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:3
 .tb-sep{width:1px;height:16px;background:var(--bg-3);flex-shrink:0}
 
 .editor-area{flex:1;display:flex;overflow:hidden}
-.md-textarea{flex:1;padding:1.5rem 1.25rem;font-family:var(--mono);font-size:.87rem;line-height:1.75;color:var(--ink);background:var(--bg);border:none;resize:none;outline:none;tab-size:4;border-right:1px solid var(--bg-3)}
+.editor-wrap{position:relative;flex:1;overflow:hidden;border-right:1px solid var(--bg-3)}
+.hl-pre{position:absolute;top:0;left:0;right:0;bottom:0;padding:1.5rem 1.25rem;font-family:var(--mono);font-size:.87rem;line-height:1.75;white-space:pre-wrap;word-break:break-word;overflow:hidden;pointer-events:none;margin:0;border:none;background:transparent;color:var(--ink-mid)}
+.md-textarea{position:absolute;top:0;left:0;width:100%;height:100%;padding:1.5rem 1.25rem;font-family:var(--mono);font-size:.87rem;line-height:1.75;color:transparent;caret-color:var(--ink);background:transparent;border:none;resize:none;outline:none;tab-size:4;overflow-y:auto;}
+/* syntax token colours */
+.hl-h{color:#4C7FA6;font-weight:500}
+.hl-bq{color:var(--ink-light);font-style:italic}
+.hl-fence,.hl-cb{color:#5b9e7a}
+.hl-meta{color:var(--ink-light)}
+.hl-ic{color:#5b9e7a}
+.hl-bold{color:var(--ink);font-weight:600}
+.hl-em{color:var(--ink);font-style:italic}
+.hl-link{color:#4C7FA6}
+.hl-li{color:var(--ink)}
 .preview{flex:1;overflow-y:auto;padding:1.5rem 2rem;display:none;font-family:var(--sans)}
 .preview.show{display:block}
 .preview h1,.preview h2,.preview h3{font-family:var(--serif);font-weight:400;color:var(--ink);margin:2rem 0 .75rem}
@@ -497,7 +509,10 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:3
         <button class="tb btn-danger" onclick="deletePost()" title="Delete post">Delete</button>
       </div>
       <div class="editor-area">
-        <textarea class="md-textarea" id="md" placeholder="Write in Markdown..."></textarea>
+        <div class="editor-wrap">
+          <pre class="hl-pre" id="hl" aria-hidden="true"></pre>
+          <textarea class="md-textarea" id="md" placeholder="Write in Markdown..."></textarea>
+        </div>
         <div class="preview" id="preview"></div>
       </div>
     </div>
@@ -508,6 +523,33 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:3
 <script>
 let currentFile = null;
 let showingPreview = false;
+
+// ── Syntax highlighting ───────────────────────────────────────────────────────
+function highlight(text) {
+  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const lines = esc(text).split('\n');
+  let inCode = false;
+  return lines.map(line => {
+    if (/^```/.test(line)) { inCode = !inCode; return `<span class="hl-fence">${line}</span>`; }
+    if (inCode) return `<span class="hl-cb">${line}</span>`;
+    if (line === '---') return `<span class="hl-meta">${line}</span>`;
+    if (/^#{1,6} /.test(line)) return `<span class="hl-h">${line}</span>`;
+    if (/^&gt; /.test(line)) return `<span class="hl-bq">${line}</span>`;
+    if (/^[-*] /.test(line) || /^\d+\. /.test(line)) return `<span class="hl-li">${line}</span>`;
+    return line
+      .replace(/(`[^`]+`)/g, '<span class="hl-ic">$1</span>')
+      .replace(/(\*\*[^*\n]+\*\*)/g, '<span class="hl-bold">$1</span>')
+      .replace(/(\*[^*\n]+\*)/g, '<span class="hl-em">$1</span>')
+      .replace(/(\[[^\]]+\]\([^)]+\))/g, '<span class="hl-link">$1</span>');
+  }).join('\n');
+}
+
+function syncHighlight() {
+  const ta = document.getElementById('md');
+  const hl = document.getElementById('hl');
+  hl.innerHTML = highlight(ta.value) + '\n';
+  hl.scrollTop = ta.scrollTop;
+}
 
 // ── Boot ──────────────────────────────────────────────────────────────────────
 loadPosts();
@@ -536,6 +578,7 @@ async function openPost(file) {
   document.getElementById('md').value      = data.body       || '';
   showEditor();
   loadPosts();
+  syncHighlight();
   if (showingPreview) renderPreview();
 }
 
@@ -547,6 +590,7 @@ function newPost() {
   document.getElementById('f-tags').value  = '';
   document.getElementById('md').value      = '';
   showEditor();
+  syncHighlight();
   document.getElementById('f-title').focus();
 }
 
@@ -637,7 +681,11 @@ async function renderPreview() {
 }
 
 document.getElementById('md').addEventListener('input', () => {
+  syncHighlight();
   if (showingPreview) renderPreview();
+});
+document.getElementById('md').addEventListener('scroll', () => {
+  document.getElementById('hl').scrollTop = document.getElementById('md').scrollTop;
 });
 
 // ── UI helpers ────────────────────────────────────────────────────────────────
