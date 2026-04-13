@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- ============================================================
+       Open Graph card — P Sai Ramcharan Reddy
+       Source SVG. Rasterize to og-image.png with:
+         rsvg-convert og-image.svg -w 1200 -h 630 -o og-image.png
+       ============================================================ -->
+
+  <defs>
+    <style>
+      .serif    { font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; }
+      .sans     { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+      .mono     { font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#F2F4F8"/>
+
+  <!-- Subtle hatch field, top-right corner -->
+  <g opacity="0.35">
+    <pattern id="hatch" patternUnits="userSpaceOnUse" width="14" height="14" patternTransform="rotate(135)">
+      <line x1="0" y1="0" x2="0" y2="14" stroke="#DDE0EA" stroke-width="1"/>
+    </pattern>
+    <rect x="780" y="0" width="420" height="630" fill="url(#hatch)"/>
+  </g>
+
+  <!-- Accent dot + eyebrow rule -->
+  <g transform="translate(80, 110)">
+    <circle cx="0" cy="0" r="6" fill="#4C7FA6"/>
+    <line x1="20" y1="0" x2="64" y2="0" stroke="#4C7FA6" stroke-width="1.5"/>
+    <text x="80" y="5" class="mono" font-size="18" fill="#4C7FA6"
+          letter-spacing="3" font-weight="400">
+      AI / ML ENGINEER
+    </text>
+  </g>
+
+  <!-- Name (serif, three lines, italic accent on Reddy.) -->
+  <g transform="translate(80, 250)">
+    <text class="serif" font-size="120" font-weight="300" fill="#1C1E27"
+          letter-spacing="-3">
+      <tspan x="0" dy="0">P Sai</tspan>
+      <tspan x="0" dy="118">Ramcharan</tspan>
+      <tspan x="0" dy="118" font-style="italic" fill="#4C7FA6">Reddy.</tspan>
+    </text>
+  </g>
+
+  <!-- Bottom meta strip -->
+  <g transform="translate(80, 580)">
+    <line x1="0" y1="-30" x2="1040" y2="-30" stroke="#DDE0EA" stroke-width="1"/>
+    <text x="0" y="0" class="mono" font-size="16" fill="#4A4E5E" letter-spacing="2">
+      <tspan font-weight="400">IIT GANDHINAGAR</tspan>
+      <tspan dx="40" fill="#8890A4">·</tspan>
+      <tspan dx="40">LLMs · PIPELINES · FULL-STACK AI</tspan>
+    </text>
+    <text x="1040" y="0" class="mono" font-size="16" fill="#8890A4"
+          letter-spacing="2" text-anchor="end">
+      RANDOMARTIST22
+    </text>
+  </g>
+</svg>
