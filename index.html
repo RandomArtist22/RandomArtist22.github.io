@@ -336,7 +336,40 @@
             line-height: 1.65;
         }
 
-        .work-list-item:nth-child(odd) {
+        /* ---- Featured card variant ----
+           Project 01 spans both columns with a larger title and more breathing
+           room. The remaining items (02-04) fall into a 2-col grid below it. */
+        .work-list-item--featured {
+            grid-column: 1 / -1;
+            padding-top: 3.5rem;
+            padding-bottom: 3.5rem;
+            border-bottom: 1px solid var(--bg-3);
+        }
+
+        .work-list-item--featured .wli-num::after {
+            content: ' \00b7  featured';
+            color: var(--ink-light);
+            letter-spacing: 0.08em;
+        }
+
+        .work-list-item--featured .wli-title {
+            font-size: clamp(2.4rem, 4vw, 3.2rem);
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.05;
+            max-width: 18ch;
+        }
+
+        .work-list-item--featured .wli-desc {
+            font-size: 1.05rem;
+            color: var(--ink-mid);
+            max-width: 640px;
+            line-height: 1.75;
+        }
+
+        /* After featured spans both cols, items 2 and 4 are visual col-1.
+           They get the asymmetric right-padding for breathing room. */
+        .work-list-item:nth-child(even):not(.work-list-item--featured) {
             padding-right: 4rem;
         }
 
@@ -351,8 +384,13 @@
                 grid-template-columns: 1fr;
             }
 
-            .work-list-item:nth-child(odd) {
+            .work-list-item:nth-child(even):not(.work-list-item--featured) {
                 padding-right: 0;
+            }
+
+            .work-list-item--featured {
+                padding-top: 2.5rem;
+                padding-bottom: 2.5rem;
             }
 
             .hero-foot {
@@ -424,6 +462,10 @@
                         LLMs, Pipelines, Full-stack AI
                     </div>
                     <div class="hero-meta-row">
+                        <span class="label">Shipped</span>
+                        4 production systems &middot; year one
+                    </div>
+                    <div class="hero-meta-row">
                         <span class="label">Status</span>
                         Open to remote internships
                     </div>
@@ -472,7 +514,7 @@
             </div>
 
             <div class="work-list">
-                <a href="works.html#reels" class="work-list-item sr">
+                <a href="works.html#reels" class="work-list-item work-list-item--featured sr">
                     <div class="wli-top">
                         <span class="wli-num">01</span>
                         <div class="wli-tags">
