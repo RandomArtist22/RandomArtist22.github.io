@@ -137,7 +137,7 @@ c
         }
 
         .hero-scroll-hint {
-            position: absolute;
+            position: fixed;
             bottom: 3.5rem;
             right: 6vw;
             writing-mode: vertical-rl;
@@ -149,8 +149,9 @@ c
             display: flex;
             align-items: center;
             gap: 12px;
-            z-index: 2;
-            animation: scrollfloat 2.5s ease-in-out infinite;
+            z-index: 205; /* Above navbar glass */
+            transition: opacity 0.6s var(--ease);
+            pointer-events: none;
         }
 
         .hero-scroll-hint::before {
@@ -184,10 +185,7 @@ c
             }
         }
 
-        @keyframes scrollfloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(10px); }
-        }
+
 
         /* ---- About strip ---- */
         .about-strip {
@@ -639,6 +637,18 @@ c
 
         window.addEventListener('resize', () => { cancelAnimationFrame(raf); resize(); raf = requestAnimationFrame(draw); });
         resize(); draw();
+
+        // ---- Scroll Hint Fade ----
+        const scrollHint = document.querySelector('.hero-scroll-hint');
+        if (scrollHint) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 120) {
+                    scrollHint.style.opacity = '0';
+                } else {
+                    scrollHint.style.opacity = '1';
+                }
+            });
+        }
     </script>
 </body>
 
